@@ -1,5 +1,5 @@
 # fetchthing
-fetch script written in c++ because i got bored
+simple fetch script written in c++ with multithreading because i got bored
 # Building
 ```
 mkdir build && cd build
