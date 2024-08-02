@@ -9,14 +9,13 @@
 int main()
 {
   std::vector<std::string> asciiart{
-    "      \x1B[90m___\x1b[0m    ",
-    "     \x1B[90m(\x1B[0m.. \x1B[90m\\\x1B[0m   ",
-    "     \x1B[90m(\x1B\x1B\x1B[33m<> \x1B[90m\x1B[0m\x1B[90m|\x1B[0m   ",
-    "    \x1B[90m/\x1B[0m/  \x1B[0m\\ \x1B[90m\\\x1B[0m  ",
-    "   \x1B[90m(\x1B[0m \x1B[0m\x1B[90m\x1B[0m|  |\x1B[0m \x1B[90m/|\x1B[0m ",
-    "  \x1B[33m_\x1B[0m\x1B[90m/\\\x1B[0m ",
-    "\x1B[0m__)\x1B[90m/\x1B[0m\x1B[33m_\x1B[0m\x1B[90m)\x1B[0m ",
-    "  \x1B[33m\\/\x1B[0m\x1B[90m-____\x1B[0m\x1B[33m\\/  "};
+    "      \x1B[90m___\x1B[0m   ",
+    "     \x1B[90m(\x1B[0m..\x1B[90m \\\x1B[0m   ",
+    "     \x1B[90m(\x1B[33m<>\x1B[90m |\x1B[0m   ",
+    "    \x1B[90m/\x1b[0m/  \\ \x1b[90m\\\x1B[0m  ",
+    "   \x1B[90m(\x1b[0m |  |\x1b[90m /|\x1B[0m ",
+    "  \x1B[33m_\x1b[90m/\\ \x1B[0m__)\x1B[90m/\x1b[33m_\x1b[0m)  ",
+    "  \x1B[33m\\/\x1B[90m-____\x1B[33m\\/ \x1B[0m "};
   const std::string* ptrCpu {nullptr};
   std::thread tCpu ([&ptrCpu] {ptrCpu = getCpu();});
   const std::string* ptrKernel {nullptr};
