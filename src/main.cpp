@@ -20,6 +20,8 @@ int main()
   std::thread tCpu ([&ptrCpu] {ptrCpu = getCpu();});
   const std::string* ptrKernel {nullptr};
   std::thread tKernel([&ptrKernel] {ptrKernel = getKernel();});
+  const std::string* ptrUptime {nullptr};
+  std::thread tUptime ([&ptrUptime] {ptrUptime = getUptime();});
   const std::string* ptrRelease {nullptr};
   std::thread tRelease ([&ptrRelease] {ptrRelease = getOs();});
   const std::string* ptrDesktop{nullptr};
@@ -27,9 +29,10 @@ int main()
   tKernel.join();
   tRelease.join();
   tDesktop.join();
+  tUptime.join();
   tCpu.join();
-  std::vector<std::string> infojutut{"OS: ", "Kernel: ", "DE: ", "CPU: "};
-  std::vector<const std::string*> values{ptrRelease, ptrKernel, ptrDesktop, ptrCpu};
+  std::vector<std::string> infojutut{"OS: ", "Kernel: ","Uptime: ", "DE: ", "CPU: "};
+  std::vector<const std::string*> values{ptrRelease, ptrKernel, ptrUptime , ptrDesktop, ptrCpu};
   for(int ascii{0}, info{0}; ascii < asciiart.size(); ++ascii){
     std::cout << asciiart[ascii] << '\t';
     

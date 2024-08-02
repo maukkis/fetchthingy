@@ -4,7 +4,6 @@
 std::string* getKernel();
 std::string* getOs();
 std::string* getDesktop();
-std::string* getSessionType();
 std::string* getCpu();
-std::string* getCpuCores();
+std::string* getUptime();
 #endif // !_MEOW_H
