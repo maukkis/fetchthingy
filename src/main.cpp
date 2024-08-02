@@ -8,7 +8,7 @@
 
 int main()
 {
-  std::vector<std::string> asciiart{
+  const std::vector<std::string> asciiart{
     "      \x1B[90m___\x1B[0m   ",
     "     \x1B[90m(\x1B[0m..\x1B[90m \\\x1B[0m   ",
     "     \x1B[90m(\x1B[33m<>\x1B[90m |\x1B[0m   ",
