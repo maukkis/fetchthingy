@@ -1,31 +1,45 @@
 #include <iostream>
 #include <string>
 #include <thread>
+#include <vector>
 #include "includes/getData.h"
+
+
 
 int main()
 {
+  std::vector<std::string> asciiart{
+    "      \x1B[90m___\x1b[0m    ",
+    "     \x1B[90m(\x1B[0m.. \x1B[90m\\\x1B[0m   ",
+    "     \x1B[90m(\x1B\x1B\x1B[33m<> \x1B[90m\x1B[0m\x1B[90m|\x1B[0m   ",
+    "    \x1B[90m/\x1B[0m/  \x1B[0m\\ \x1B[90m\\\x1B[0m  ",
+    "   \x1B[90m(\x1B[0m \x1B[0m\x1B[90m\x1B[0m|  |\x1B[0m \x1B[90m/|\x1B[0m ",
+    "  \x1B[33m_\x1B[0m\x1B[90m/\\\x1B[0m ",
+    "\x1B[0m__)\x1B[90m/\x1B[0m\x1B[33m_\x1B[0m\x1B[90m)\x1B[0m ",
+    "  \x1B[33m\\/\x1B[0m\x1B[90m-____\x1B[0m\x1B[33m\\/  "};
+  const std::string* ptrCpu {nullptr};
+  std::thread tCpu ([&ptrCpu] {ptrCpu = getCpu();});
   const std::string* ptrKernel {nullptr};
   std::thread tKernel([&ptrKernel] {ptrKernel = getKernel();});
   const std::string* ptrRelease {nullptr};
   std::thread tRelease ([&ptrRelease] {ptrRelease = getOs();});
   const std::string* ptrDesktop{nullptr};
   std::thread tDesktop([&ptrDesktop]{ ptrDesktop = getDesktop();} );
-  const std::string* ptrSession {nullptr};
-  std::thread tSession ([&ptrSession] {ptrSession = getSessionType();});
-  const std::string* ptrCpu {nullptr};
-  std::thread tCpu ([&ptrCpu] {ptrCpu = getCpu();});
-  const std::string* ptrCores {nullptr};
-  std::thread tCores ([&ptrCores] {ptrCores = getCpuCores();});
-  tRelease.join();
-  std::cout << "OS: " << *ptrRelease << " nya~ \n";
   tKernel.join();
-  std::cout << "Kernel: " << *ptrKernel << " nya~ \n";
+  tRelease.join();
   tDesktop.join();
-  tSession.join();
-  std::cout << "DE: " << *ptrDesktop << " (" << *ptrSession << ")" << " nya~\n";
   tCpu.join();
-  tCores.join();
-  std::cout << "CPU: " << *ptrCpu << " (" << *ptrCores <<  ')' <<" nya~ \n";
+  std::vector<std::string> infojutut{"OS: ", "Kernel: ", "DE: ", "CPU: "};
+  std::vector<const std::string*> values{ptrRelease, ptrKernel, ptrDesktop, ptrCpu};
+  for(int ascii{0}, info{0}; ascii < asciiart.size(); ++ascii){
+    std::cout << asciiart[ascii] << '\t';
+    
+    if (info < values.size()) {
+      std::cout << infojutut[info];
+      std::cout << *values[info];
+      ++info;
+    }
+    std::cout << '\n';
+  }
   return 0;
 }

@@ -24,13 +24,6 @@ std::string* getDesktop(){
   return &desktop;
 }
 
-std::string* getSessionType(){
-  redi::ipstream proc("echo $XDG_SESSION_TYPE");
-  static std::string session(ibuf_it(proc.rdbuf()), ibuf_it());
-  session.erase(std::remove(session.begin() , session.end(), '\n'), session.end()); 
-  return &session;
-}
-
 std::string* getCpu(){
   redi::ipstream proc("awk -F ' *: | @' \\ '/model name|Hardware|Processor|^cpu model|chip type|^cpu type/ { cpu=$2; if ($1 == Hardware) exit } END { print cpu }' /proc/cpuinfo");
   static std::string cpu(ibuf_it(proc.rdbuf()), ibuf_it());
@@ -38,10 +31,4 @@ std::string* getCpu(){
   return &cpu;
 }
 
-std::string* getCpuCores(){
-  redi::ipstream proc("nproc --all");
-  static std::string cores(ibuf_it(proc.rdbuf()), ibuf_it());
-  cores.erase(std::remove(cores.begin() , cores.end(), '\n'), cores.end());
-  return &cores;
-}
 
