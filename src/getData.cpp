@@ -1,6 +1,8 @@
 #include <iterator>
 #include "includes/3rdparty/pstream.h"
 #include <string>
+#include <iostream>
+#include <fstream>
 
 using ibuf_it = std::istreambuf_iterator<char>;
 std::string* getKernel(){
@@ -36,4 +38,13 @@ std::string* getUptime(){
   static std::string uptime(ibuf_it(proc.rdbuf()), ibuf_it());
   uptime.erase(std::remove(uptime.begin(), uptime.end(), '\n'), uptime.end());
   return &uptime;
+ // getMem();
 }
+/* wip
+void getMem(){
+  std::string line;
+  std::ifstream mem("/proc/meminfo");
+  getline(mem, line);
+  std::cout << line;
+
+} */

@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.30.1)
+cmake_minimum_required(VERSION 3.25.1)
 
 project(fetchthing
 DESCRIPTION "simple fetch script with multithreading written in C++")
