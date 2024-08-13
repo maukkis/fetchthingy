@@ -6,4 +6,5 @@ std::string* getOs();
 std::string* getDesktop();
 std::string* getCpu();
 std::string* getUptime();
+const std::string* getMem();
 #endif // !_MEOW_H

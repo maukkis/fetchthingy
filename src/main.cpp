@@ -1,3 +1,4 @@
+#include <iomanip>
 #include <iostream>
 #include <string>
 #include <thread>
@@ -18,6 +19,8 @@ int main()
     "  \x1B[33m\\/\x1B[90m-____\x1B[33m\\/ \x1B[0m "};
   const std::string* ptrCpu {nullptr};
   std::thread tCpu ([&ptrCpu] {ptrCpu = getCpu();});
+  const std::string* ptrMem{nullptr};
+  std::thread tMem ([&ptrMem] {ptrMem = getMem();});
   const std::string* ptrKernel {nullptr};
   std::thread tKernel([&ptrKernel] {ptrKernel = getKernel();});
   const std::string* ptrUptime {nullptr};
@@ -31,8 +34,9 @@ int main()
   tDesktop.join();
   tUptime.join();
   tCpu.join();
-  std::vector<std::string> infojutut{"OS: ", "Kernel: ","Uptime: ", "DE: ", "CPU: "};
-  std::vector<const std::string*> values{ptrRelease, ptrKernel, ptrUptime , ptrDesktop, ptrCpu};
+  tMem.join();
+  std::vector<std::string> infojutut{"OS: ", "Kernel: ","Uptime: ", "DE: ", "CPU: ", "Mem: "};
+  std::vector<const std::string*> values{ptrRelease, ptrKernel, ptrUptime , ptrDesktop, ptrCpu, ptrMem};
   for(int ascii{0}, info{0}; ascii < asciiart.size(); ++ascii){
     std::cout << asciiart[ascii] << '\t';
     

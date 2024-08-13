@@ -1,5 +1,8 @@
+#include <cmath>
+#include <cstdio>
 #include <iterator>
 #include "includes/3rdparty/pstream.h"
+#include <sstream>
 #include <string>
 #include <iostream>
 #include <fstream>
@@ -38,13 +41,31 @@ std::string* getUptime(){
   static std::string uptime(ibuf_it(proc.rdbuf()), ibuf_it());
   uptime.erase(std::remove(uptime.begin(), uptime.end(), '\n'), uptime.end());
   return &uptime;
- // getMem();
 }
-/* wip
-void getMem(){
+
+const std::string* getMem(){
   std::string line;
   std::ifstream mem("/proc/meminfo");
-  getline(mem, line);
+  double maxmem;
+  double usedmem;
   std::cout << line;
-
-} */
+  while(getline(mem, line)){
+    if(line.find("MemTotal:") == 0){
+      std::istringstream iss(line);
+      iss.ignore(256, ' ');
+      double meow;
+      iss >> meow;
+      maxmem = meow / 1048576;
+      
+    } else if(line.find("Active:") == 0){
+      std::istringstream iss(line);
+      iss.ignore(256, ' ');
+      double meow;
+      iss >> meow;
+      usedmem = meow / 1048576;
+      break;
+    }
+  }
+  static const std::string meow{std::to_string(usedmem) + '/' + std::to_string(maxmem) + " GiB"};
+  return &meow;
+} 
