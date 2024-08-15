@@ -40,6 +40,7 @@ std::string* getUptime(){
   redi::ipstream proc("uptime -p");
   static std::string uptime(ibuf_it(proc.rdbuf()), ibuf_it());
   uptime.erase(std::remove(uptime.begin(), uptime.end(), '\n'), uptime.end());
+  uptime.erase(0, 3);
   return &uptime;
 }
 
