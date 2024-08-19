@@ -49,7 +49,6 @@ const std::string* getMem(){
   std::ifstream mem("/proc/meminfo");
   double maxmem;
   double usedmem;
-  std::cout << line;
   while(getline(mem, line)){
     if(line.find("MemTotal:") == 0){
       std::istringstream iss(line);
